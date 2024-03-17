@@ -3,7 +3,6 @@ using System.IO.Compression;
 
 FileStream input = File.OpenRead(args[0]);
 BinaryReader br = new(input);
-Directory.CreateDirectory(Path.GetDirectoryName(args[0]) + "\\" + Path.GetFileNameWithoutExtension(args[0]));
 if (new string(br.ReadChars(7)) != "D-PACK2")
     throw new Exception("Not a ASURA dat file.");
 
@@ -24,6 +23,7 @@ for (int i = 0; i < fileCount; i++)
     });
 }
 
+Directory.CreateDirectory(Path.GetDirectoryName(args[0]) + "\\" + Path.GetFileNameWithoutExtension(args[0]));
 foreach (SUBFILE subfile in subfiles)
 {
     br.BaseStream.Position = subfile.start;
